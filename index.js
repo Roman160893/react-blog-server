@@ -11,9 +11,7 @@ import * as UserController from './controllers/UserController.js';
 import * as PostController from './controllers/PostController.js';
 
 mongoose
-  .connect(
-    'mongodb+srv://admin:admin@cluster0.hbr3imo.mongodb.net/blog?retryWrites=true&w=majority',
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('DB ok...'))
   .catch((err) => console.log('DB err...', err));
 
@@ -68,7 +66,7 @@ app.patch(
   PostController.update,
 );
 
-app.listen(3333, (err) => {
+app.listen(process.env.PORT || 3333, (err) => {
   if (err) {
     return console.log(err);
   }
